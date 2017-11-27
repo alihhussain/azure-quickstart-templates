@@ -17,18 +17,25 @@ This template allows you to host an instance of Jenkins on a DS1_v2 size Linux U
 ## B. Setup SSH port forwarding
 **By default the Jenkins instance is using the http protocol and listens on port 8080. Users shouldn't authenticate over unsecured protocols!**
 
-You need to setup port forwarding to view the Jenkins UI on your local machine.
+You need to setup port forwarding to view the Jenkins UI on your local machine. If you do not know the full DNS name of your instance, go to the Portal and find it in the deployment outputs here: `Resource Groups > {Resource Group Name} > Deployments > {Deployment Name, usually 'Microsoft.Template'} > Outputs`
 
 ### If you are using Windows:
-1. Install Putty or use any bash shell for Windows (if using a bash shell, follow the instructions for Linux or Mac).
+Install Putty or use any bash shell for Windows (if using a bash shell, follow the instructions for Linux or Mac).
+
+Run this command:
+```
+putty.exe -ssh -L 8080:localhost:8080 <User name>@<Public DNS name of instance you just created>
+```
+
+Or follow these manual steps:
 1. Launch Putty and navigate to 'Connection > SSH > Tunnels'
 1. In the Options controlling SSH port forwarding window, enter 8080 for Source port. Then enter 127.0.0.1:8080 for the Destination. Click Add.
 1. Click Open to establish the connection.
 
 ### If you are using Linux or Mac:
 Run this command:
-```
-  ssh -L 127.0.0.1:8080:localhost:8080 <User name>@<Public DNS name of instance you just created>
+```bash
+ssh -L 8080:localhost:8080 <User name>@<Public DNS name of instance you just created>
 ```
 
 ## C. Connect to Jenkins
